@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myfirstapplication.R
@@ -26,7 +27,7 @@ class DungeonListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
 
     //on déclare un adapter qui va lier les data à un élément de la liste
-    private val adapter = DungeonAdapter(listOf())
+    private val adapter = DungeonAdapter(listOf(), ::onClickedDungeon)
 
     //on déclare un layout qui arrange les éléments de la liste
     private val layoutManager = LinearLayoutManager(context)
@@ -72,5 +73,9 @@ class DungeonListFragment : Fragment() {
                 TODO("Not yet implemented")
             }
         })
+    }
+
+    private fun onClickedDungeon(dungeon: Dungeon) {
+        findNavController().navigate(R.id.navigateToDungeonDetailFragment)
     }
 }

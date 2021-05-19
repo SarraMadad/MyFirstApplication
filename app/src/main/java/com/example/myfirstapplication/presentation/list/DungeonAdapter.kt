@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myfirstapplication.R
 //la classe adapter lie les données avec la viewholder, qui définit chaque item de la liste
 //on change dataSet en List au lieu d'Array car l'utilisation d'une interface est plus intéressante
-class DungeonAdapter(private var dataSet: List<Dungeon>) : RecyclerView.Adapter<DungeonAdapter.ViewHolder>() {
+class DungeonAdapter(private var dataSet: List<Dungeon>, var listener: ((Dungeon)->Unit)? = null) : RecyclerView.Adapter<DungeonAdapter.ViewHolder>() {
 
     /**
      * Provide a reference to the type of views that you are using
@@ -46,6 +46,9 @@ class DungeonAdapter(private var dataSet: List<Dungeon>) : RecyclerView.Adapter<
         // contents of the view with that element
         val dungeon = dataSet[position]
         viewHolder.textView.text = dungeon.name
+        viewHolder.itemView.setOnClickListener {
+            listener?.invoke(dungeon)
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
