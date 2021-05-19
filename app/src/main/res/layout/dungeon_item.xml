@@ -8,8 +8,8 @@
     >
     
     <TextView
-        android:id="@+id/machinelearning_name"
-        tools:text="IA"
+        android:id="@+id/dungeon_name"
+        tools:text="Dungeon"
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

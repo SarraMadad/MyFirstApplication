@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.myfirstapplication.presentation.list.MachineLearningListFragment"
+        android:name="com.example.myfirstapplication.presentation.list.DungeonListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_machinelearning_list">
+        tools:layout="@layout/fragment_dungeon_list">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
