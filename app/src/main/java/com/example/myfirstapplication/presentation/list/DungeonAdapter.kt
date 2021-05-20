@@ -3,8 +3,10 @@ package com.example.myfirstapplication.presentation.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myfirstapplication.R
 import kotlin.reflect.KFunction1
 
@@ -19,10 +21,12 @@ class DungeonAdapter(private var dataSet: List<Dungeon>, var listener: ((Dungeon
     //ceci est une "cellule", un élément de Dungeon
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView
+        val imageView : ImageView
 
         init {
             // Define click listener for the ViewHolder's View.
             textView = view.findViewById(R.id.dungeon_name)
+            imageView = view.findViewById(R.id.dungeon_img)
         }
     }
 
@@ -51,6 +55,12 @@ class DungeonAdapter(private var dataSet: List<Dungeon>, var listener: ((Dungeon
         viewHolder.itemView.setOnClickListener {
             listener?.invoke(dungeon)
         }
+
+        Glide
+            .with(viewHolder.itemView.context)
+            .load("https://img2.freepng.fr/20180525/laa/kisspng-dungeons-dragons-pathfinder-roleplaying-game-ogr-5b07cd024aae33.5203842815272378903059.jpg")
+            .centerCrop()
+            .into(viewHolder.imageView);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
