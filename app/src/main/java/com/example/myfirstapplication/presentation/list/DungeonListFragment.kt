@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myfirstapplication.R
+import com.example.myfirstapplication.Singleton
 import com.example.myfirstapplication.api.DungeonApi
 import com.example.myfirstapplication.api.DungeonResponse
 import retrofit2.Call
@@ -30,7 +31,7 @@ class DungeonListFragment : Fragment() {
     private val adapter = DungeonAdapter(listOf(), ::onClickedDungeon)
 
     //on déclare un layout qui arrange les éléments de la liste
-    private val layoutManager = LinearLayoutManager(context)
+    //private val layoutManager = LinearLayoutManager(context)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,18 +51,19 @@ class DungeonListFragment : Fragment() {
         //on gère la liste, on lui donne l'adapter et on initialise le layout
         recyclerView.apply {
             adapter = this@DungeonListFragment.adapter
-            layoutManager = this@DungeonListFragment.layoutManager
+            layoutManager = LinearLayoutManager(context)
+            //layoutManager = this@DungeonListFragment.layoutManager
         }
 
         //on va désormais manipuler notre API
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://www.dnd5eapi.co/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        //val retrofit = Retrofit.Builder()
+        //    .baseUrl("https://www.dnd5eapi.co/api/")
+        //    .addConverterFactory(GsonConverterFactory.create())
+        //    .build()
 
-        val dungeonApi: DungeonApi = retrofit.create(DungeonApi::class.java)
+        //val dungeonApi: DungeonApi = retrofit.create(DungeonApi::class.java)
 
-        dungeonApi.getDungeonList().enqueue(object: Callback<DungeonResponse> {
+        Singleton.dungeonApi.getDungeonList().enqueue(object: Callback<DungeonResponse> {
             override fun onResponse(call: Call<DungeonResponse>, response: Response<DungeonResponse>) {
                 if (response.isSuccessful && response.body() != null){
                     val dungeonResponse = response.body()!!
