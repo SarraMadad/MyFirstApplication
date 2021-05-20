@@ -52,7 +52,7 @@ class DungeonDetailFragment : Fragment() {
                     textViewName.text = response.body()!!.name
                     //textViewName.text = index.toString()
                 } else {
-                    textViewName.text = "truc"
+                    textViewName.text = "test"
 
                 }
             }
@@ -62,6 +62,5 @@ class DungeonDetailFragment : Fragment() {
             }
 
         })
-
     }
 }

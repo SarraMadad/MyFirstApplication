@@ -56,13 +56,6 @@ class DungeonListFragment : Fragment() {
             //layoutManager = this@DungeonListFragment.layoutManager
         }
 
-        //on va désormais manipuler notre API
-        //val retrofit = Retrofit.Builder()
-        //    .baseUrl("https://www.dnd5eapi.co/api/")
-        //    .addConverterFactory(GsonConverterFactory.create())
-        //    .build()
-
-        //val dungeonApi: DungeonApi = retrofit.create(DungeonApi::class.java)
 
         Singleton.dungeonApi.getDungeonList().enqueue(object: Callback<DungeonResponse> {
             override fun onResponse(call: Call<DungeonResponse>, response: Response<DungeonResponse>) {
