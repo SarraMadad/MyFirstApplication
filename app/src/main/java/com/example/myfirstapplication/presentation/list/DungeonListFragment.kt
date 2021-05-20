@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -78,6 +79,8 @@ class DungeonListFragment : Fragment() {
     }
 
     private fun onClickedDungeon(dungeon: Dungeon) {
-        findNavController().navigate(R.id.navigateToDungeonDetailFragment)
+        findNavController().navigate(R.id.navigateToDungeonDetailFragment, bundleOf(
+                "dungeonIndex" to dungeon.index
+        ))
     }
 }

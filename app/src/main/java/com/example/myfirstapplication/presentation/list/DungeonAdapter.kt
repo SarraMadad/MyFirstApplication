@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myfirstapplication.R
+import kotlin.reflect.KFunction1
+
 //la classe adapter lie les données avec la viewholder, qui définit chaque item de la liste
 //on change dataSet en List au lieu d'Array car l'utilisation d'une interface est plus intéressante
 class DungeonAdapter(private var dataSet: List<Dungeon>, var listener: ((Dungeon)->Unit)? = null) : RecyclerView.Adapter<DungeonAdapter.ViewHolder>() {

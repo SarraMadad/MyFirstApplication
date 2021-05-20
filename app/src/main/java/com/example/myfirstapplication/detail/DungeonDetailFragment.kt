@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import com.example.myfirstapplication.R
 import com.example.myfirstapplication.Singleton
 import com.example.myfirstapplication.api.DungeonDetailResponse
@@ -21,6 +19,7 @@ import retrofit2.Response
 class DungeonDetailFragment : Fragment() {
 
     private lateinit var textViewName: TextView
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -41,13 +40,20 @@ class DungeonDetailFragment : Fragment() {
     }
 
     private fun callApi() {
-        Singleton.dungeonApi.getDungeonDetail("barbarian").enqueue(object: Callback<DungeonDetailResponse> {
+
+        val index = arguments?.getString("dungeonIndex")
+
+        Singleton.dungeonApi.getDungeonDetail(index.toString()).enqueue(object: Callback<DungeonDetailResponse> {
             override fun onResponse(
                     call: Call<DungeonDetailResponse>,
                     response: Response<DungeonDetailResponse>
             ) {
                 if (response.isSuccessful && response.body() != null) {
                     textViewName.text = response.body()!!.name
+                    //textViewName.text = index.toString()
+                } else {
+                    textViewName.text = "truc"
+
                 }
             }
 
