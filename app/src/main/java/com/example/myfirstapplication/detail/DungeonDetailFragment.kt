@@ -50,8 +50,9 @@ class DungeonDetailFragment : Fragment() {
             ) {
                 if (response.isSuccessful && response.body() != null) {
                     textViewName.text = response.body()!!.name
+                    //textViewName.text = response.body()!!.url
+                    //textViewName.text = response.body()!!.starting_equipment.toString()
                     //TODO: add some content for detail screen ?
-                    //textViewName.text = index.toString()
                 } else {
                     textViewName.text = "test"
 

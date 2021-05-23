@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +36,9 @@ class DungeonListFragment : Fragment() {
     //on déclare un layout qui arrange les éléments de la liste
     //private val layoutManager = LinearLayoutManager(context)
 
+    //on crée une variable de la classe dungeonlistviewmodel
+    private val viewModel : DungeonListViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,19 +61,10 @@ class DungeonListFragment : Fragment() {
             //layoutManager = this@DungeonListFragment.layoutManager
         }
 
-
-        Singleton.dungeonApi.getDungeonList().enqueue(object: Callback<DungeonResponse> {
-            override fun onResponse(call: Call<DungeonResponse>, response: Response<DungeonResponse>) {
-                if (response.isSuccessful && response.body() != null){
-                    val dungeonResponse = response.body()!!
-                    adapter.updateList(dungeonResponse.results)
-                }
-            }
-
-            override fun onFailure(call: Call<DungeonResponse>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
+        viewModel.dungList.observe(viewLifecycleOwner, Observer { list ->
+            adapter.updateList(list)
         })
+
     }
 
     private fun onClickedDungeon(dungeon: Dungeon) {
