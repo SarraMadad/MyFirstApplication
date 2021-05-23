@@ -11,7 +11,7 @@ import retrofit2.Response
 
 class DungeonListViewModel : ViewModel() {
 
-    val dungList : MutableLiveData<List<Dungeon>> = MutableLiveData()
+    val dungList : MutableLiveData<DungeonModel> = MutableLiveData()
 
     init {
 
@@ -20,17 +20,19 @@ class DungeonListViewModel : ViewModel() {
     }
 
     private fun callApi() {
+        dungList.value = DungeonLoader
         Singleton.dungeonApi.getDungeonList().enqueue(object: Callback<DungeonResponse> {
             override fun onResponse(call: Call<DungeonResponse>, response: Response<DungeonResponse>) {
                 if (response.isSuccessful && response.body() != null){
                     val dungeonResponse = response.body()!!
-                    dungList.value = dungeonResponse.results
-                    //adapter.updateList(dungeonResponse.results)
+                    dungList.value = DungeonSuccess(dungeonResponse.results)
+                } else {
+                    dungList.value = DungeonError
                 }
             }
 
             override fun onFailure(call: Call<DungeonResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                dungList.value = DungeonError
             }
         })
     }

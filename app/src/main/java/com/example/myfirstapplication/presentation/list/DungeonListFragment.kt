@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -30,6 +33,12 @@ class DungeonListFragment : Fragment() {
     //on déclare une recyclerview
     private lateinit var recyclerView: RecyclerView
 
+    //on déclare le loader
+    private lateinit var loader: ProgressBar
+
+    //on déclare le mode error
+    private lateinit var textViewError: TextView
+
     //on déclare un adapter qui va lier les data à un élément de la liste
     private val adapter = DungeonAdapter(listOf(), ::onClickedDungeon)
 
@@ -53,6 +62,8 @@ class DungeonListFragment : Fragment() {
         //on initialise la recycleview pour récupérer mon élément et le mettre dans la liste
         //lien entre classe kotlin et fichier xml listfragment
         recyclerView = view.findViewById(R.id.dungeon_recyclerview)
+        loader = view.findViewById(R.id.dungeon_loader)
+        textViewError = view.findViewById(R.id.dungeon_error)
 
         //on gère la liste, on lui donne l'adapter et on initialise le layout
         recyclerView.apply {
@@ -61,8 +72,14 @@ class DungeonListFragment : Fragment() {
             //layoutManager = this@DungeonListFragment.layoutManager
         }
 
-        viewModel.dungList.observe(viewLifecycleOwner, Observer { list ->
-            adapter.updateList(list)
+        viewModel.dungList.observe(viewLifecycleOwner, Observer { dungeonModel ->
+            loader.isVisible = dungeonModel is DungeonLoader
+            textViewError.isVisible = dungeonModel is DungeonError
+
+            if (dungeonModel is DungeonSuccess) {
+                adapter.updateList(dungeonModel.dungList)
+            }
+
         })
 
     }
