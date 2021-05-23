@@ -58,7 +58,7 @@ class DungeonAdapter(private var dataSet: List<Dungeon>, var listener: ((Dungeon
 
         Glide
             .with(viewHolder.itemView.context)
-            .load("https://img2.freepng.fr/20180525/laa/kisspng-dungeons-dragons-pathfinder-roleplaying-game-ogr-5b07cd024aae33.5203842815272378903059.jpg")
+            .load("https://e7.pngegg.com/pngimages/491/184/png-clipart-dungeons-dragons-pathfinder-roleplaying-game-elf-concept-art-character-elf-fictional-character-cartoon-thumbnail.png")
             .centerCrop()
             .into(viewHolder.imageView);
     }

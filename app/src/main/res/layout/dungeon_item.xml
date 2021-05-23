@@ -15,17 +15,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
-    
+
     <TextView
         android:id="@+id/dungeon_name"
-        tools:text="Dungeon"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/dungeon_img"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="cursive"
+        android:textColor="#206123"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dungeon_img"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Dungeon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
